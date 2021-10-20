@@ -66,14 +66,6 @@ const FooterText = styled.p`
     cursor: pointer;
 `
 
-const Header = styled.header`
-    width: 100%;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-`
-
 const HeaderText = styled.p`
     font-family: 'Raleway', sans-serif;
     font-size: 26px;
@@ -81,4 +73,31 @@ const HeaderText = styled.p`
     color: white;
 `
 
-export { PageContent, Logo, TextInput, LongButton, FooterText, Header, HeaderText };
+const FooterButton = styled.button`
+    width: 47%;
+    height: 100%;
+    background-color: rgb(163, 40, 214);
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 10px;
+    cursor: pointer;
+
+    img{
+        height: 20px;
+        width: 20px;
+    }
+
+    p{
+        font-family: 'Raleway', sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        color: white;
+        text-align: start;
+    }
+`
+
+export { PageContent, Logo, TextInput, LongButton, FooterText, HeaderText, FooterButton };

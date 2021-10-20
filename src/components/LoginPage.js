@@ -6,7 +6,6 @@ import {
     LongButton,
     FooterText
 } from "../styles/StylesShared";
-import styled from 'styled-components';
 
 export default function LoginPage() {
     const history = useHistory();
