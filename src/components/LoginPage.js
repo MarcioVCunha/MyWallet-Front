@@ -15,7 +15,7 @@ export default function LoginPage() {
             <Logo>MyWallet</Logo>
             <TextInput placeholder='E-mail' />
             <TextInput placeholder='Senha' />
-            <LongButton>Entrar</LongButton>
+            <LongButton onClick={() => history.push('/home-page')}>Entrar</LongButton>
             <FooterText
                 onClick={() => history.push('/sign-up')}>
                 Primeira vez? Cadastre-se!

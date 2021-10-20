@@ -2,7 +2,8 @@ import styled from "styled-components"
 import {
     FooterButton,
     HeaderText,
-    PageContent
+    PageContent,
+    Header
 }
     from "../styles/StylesShared"
 import { useHistory } from 'react-router-dom';
@@ -19,15 +20,17 @@ export default function HomePage() {
         <PageContent>
             <Header>
                 <HeaderText>Olá, {name}</HeaderText>
-                <LogoutImage src={Logout} alt='Exit the app icon' />
+                <LogoutImage onClick={() => history.push('/')} src={Logout} alt='Exit the app icon' />
             </Header>
+
             <WalletHistory></WalletHistory>
+            
             <Footer>
-                <FooterButton onClick={() => history.push('/save-add')}>
+                <FooterButton onClick={() => history.push('/new-add')}>
                     <img src={PlusSign} alt='Add icon'/>
                     <p>Nova Entrada</p>
                 </FooterButton>
-                <FooterButton onClick={() => history.push('/save-remove')}>
+                <FooterButton onClick={() => history.push('/new-remove')}>
                     <img src={MinusSign}  alt='Remove icon'/>
                     <p>Nova Saída</p>
                 </FooterButton>
@@ -35,14 +38,6 @@ export default function HomePage() {
         </PageContent >
     )
 }
-
-const Header = styled.header`
-    width: 100%;
-    margin: 25px auto 25px auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-`
 
 const LogoutImage = styled.img`
     height: 25px;

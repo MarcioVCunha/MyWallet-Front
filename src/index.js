@@ -9,6 +9,8 @@ import {
 import LoginPage from './components/LoginPage';
 import SignUpPage from './components/SignUpPage';
 import HomePage from './components/HomePage';
+import NewAdd from './components/NewAdd';
+import NewRemove from './components/NewRemove';
 
 function App() {
     return (
@@ -23,6 +25,12 @@ function App() {
                 </Route>
                 <Route path='/home-page' exact>
                     <HomePage />
+                </Route>
+                <Route path='/new-add' exact>
+                    <NewAdd />
+                </Route>
+                <Route path='/new-remove' exact>
+                    <NewRemove />
                 </Route>
             </Switch>
         </BrowserRouter>

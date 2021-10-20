@@ -66,6 +66,14 @@ const FooterText = styled.p`
     cursor: pointer;
 `
 
+const Header = styled.header`
+    width: 100%;
+    margin: 25px auto 25px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
+
 const HeaderText = styled.p`
     font-family: 'Raleway', sans-serif;
     font-size: 26px;
@@ -100,4 +108,9 @@ const FooterButton = styled.button`
     }
 `
 
-export { PageContent, Logo, TextInput, LongButton, FooterText, HeaderText, FooterButton };
+const AddRemovePageContent = styled.div`
+    width: 80%;
+    margin: 20px auto 0 auto;
+`
+
+export { PageContent, Logo, TextInput, LongButton, FooterText, Header, HeaderText, FooterButton, AddRemovePageContent };
