@@ -6,18 +6,84 @@ import {
     FooterText
 } from "../styles/StylesShared";
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+
+const userInfo = {
+    name: '',
+    email: '',
+    password: '',
+    passwordConfirmation: ''
+};
+
+let isDisabled = false;
+
+function saveString(e, type) {
+    switch (type) {
+        case 'name':
+            userInfo.name = e.target.value;
+            break;
+
+        case 'email':
+            userInfo.email = e.target.value;
+            break;
+
+        case 'password':
+            userInfo.password = e.target.value;
+            break;
+
+        case 'password confirmation':
+            userInfo.passwordConfirmation = e.target.value;
+            break;
+
+        default:
+            break;
+    }
+}
+
+function sendObject(history) {
+    toggleInputs();
+    const promisse = axios.post('http://localhost:4000/sign-up', userInfo);
+    promisse.then(() => {
+        handleSucces();
+        history.push('/');
+    }).catch(handleError);
+}
+
+function handleSucces() {
+    toggleInputs();
+    userInfo.name = '';
+    userInfo.email = '';
+    userInfo.password = '';
+    userInfo.passwordConfirmation = '';
+    alert('Cadastro feito com sucesso');
+}
+
+function handleError(resp) {
+    if (resp.response.status === 406) {
+        alert('"Senha" e "Confirmar Senha" diferentes');
+    } else if (resp.response.status === 407) {
+        alert('Email já cadastrado');
+    } else {
+        alert('Não conseguimos efetuar o cadastro');
+    }
+    toggleInputs();
+}
+
+function toggleInputs() {
+    isDisabled = !isDisabled;
+}
 
 export default function SignUpPage() {
     const history = useHistory();
     return (
         <PageContent>
             <Logo>MyWallet</Logo>
-            <TextInput placeholder='Nome' />
-            <TextInput placeholder='E-mail' />
-            <TextInput placeholder='Senha' />
-            <TextInput placeholder='Confirmar Senha' />
-            <LongButton>Cadastrar</LongButton>
-            <FooterText
+            <TextInput disabled={isDisabled} onChange={(e) => saveString(e, 'name')} placeholder='Nome' />
+            <TextInput disabled={isDisabled} onChange={(e) => saveString(e, 'email')} placeholder='E-mail' />
+            <TextInput disabled={isDisabled} onChange={(e) => saveString(e, 'password')} placeholder='Senha' />
+            <TextInput disabled={isDisabled} onChange={(e) => saveString(e, 'password confirmation')} placeholder='Confirmar Senha' />
+            <LongButton disabled={isDisabled} onClick={() => sendObject(history)}>Cadastrar</LongButton>
+            <FooterText disabled={isDisabled}
                 onClick={() => history.push('/')}>
                 Já tem uma conta? Entre agora!
             </FooterText>
