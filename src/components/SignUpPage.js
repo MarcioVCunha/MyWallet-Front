@@ -64,7 +64,11 @@ function handleError(resp) {
     } else if (resp.response.status === 407) {
         alert('Email já cadastrado');
     } else {
-        alert('Não conseguimos efetuar o cadastro');
+        alert(`
+            Não conseguimos efetuar o cadastro.
+            O nome deve ter pelo menos 3 caracteres.
+            A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma minúscula e um número.
+        `);
     }
     toggleInputs();
 }
