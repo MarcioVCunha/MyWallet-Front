@@ -7,13 +7,14 @@ import {
 }
     from "../styles/StylesShared"
 import { useHistory } from 'react-router-dom';
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 import UserContext from "../contexts/userContext";
 import Logout from '../Assets/Logout.svg';
 import MinusSign from '../Assets/MinusSign.svg';
 import PlusSign from '../Assets/PlusSign.svg';
-import axios from "axios";
+import WalletHistory from "./WalletHistory.js";
 
 function logout(setToken, history) {
     setToken('');
@@ -21,9 +22,24 @@ function logout(setToken, history) {
 }
 
 export default function HomePage() {
-    const name = 'Fulano';
     const { token, setToken } = useContext(UserContext);
     const history = useHistory();
+    const [name, setName] = useState('');
+
+    const config = {
+        headers: {
+            "Authorization": "Bearer " + token
+        }
+    }
+
+    useEffect(() => {
+        const promisse = axios.get('http://localhost:4000/user-info', config);
+        promisse.then(handleSucces);
+    }, [])
+
+    function handleSucces(res) {
+        setName(res.data.name);
+    }
 
     return (
         <PageContent>
@@ -36,7 +52,7 @@ export default function HomePage() {
                 />
             </Header>
 
-            <WalletHistory></WalletHistory>
+            <WalletHistory />
 
             <Footer>
                 <FooterButton onClick={() => history.push('/new-add')}>
@@ -55,14 +71,6 @@ export default function HomePage() {
 const LogoutImage = styled.img`
     height: 25px;
     cursor: pointer;
-`
-
-const WalletHistory = styled.main`
-    background-color: white;
-    border-radius: 5px;
-    width: 100%;
-    height: 100%;
-    margin-bottom: 10px;
 `
 
 const Footer = styled.footer`
