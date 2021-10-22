@@ -5,7 +5,9 @@ import {
     Switch,
     Route
 } from "react-router-dom";
+import { useState } from 'react';
 
+import UserContext from './contexts/userContext';
 import LoginPage from './components/LoginPage';
 import SignUpPage from './components/SignUpPage';
 import HomePage from './components/HomePage';
@@ -13,27 +15,30 @@ import NewAdd from './components/NewAdd';
 import NewRemove from './components/NewRemove';
 
 function App() {
+    const [token, setToken] = useState('');
     return (
-        <BrowserRouter>
-            <GlobalStyle />
-            <Switch>
-                <Route path='/' exact>
-                    <LoginPage />
-                </Route>
-                <Route path='/sign-up' exact>
-                    <SignUpPage />
-                </Route>
-                <Route path='/home-page' exact>
-                    <HomePage />
-                </Route>
-                <Route path='/new-add' exact>
-                    <NewAdd />
-                </Route>
-                <Route path='/new-remove' exact>
-                    <NewRemove />
-                </Route>
-            </Switch>
-        </BrowserRouter>
+        <UserContext.Provider value={{token, setToken}}>
+            <BrowserRouter>
+                <GlobalStyle />
+                <Switch>
+                    <Route path='/' exact>
+                        <LoginPage />
+                    </Route>
+                    <Route path='/sign-up' exact>
+                        <SignUpPage />
+                    </Route>
+                    <Route path='/home-page' exact>
+                        <HomePage />
+                    </Route>
+                    <Route path='/new-add' exact>
+                        <NewAdd />
+                    </Route>
+                    <Route path='/new-remove' exact>
+                        <NewRemove />
+                    </Route>
+                </Switch>
+            </BrowserRouter>
+        </UserContext.Provider>
     )
 }
 

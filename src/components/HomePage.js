@@ -7,31 +7,44 @@ import {
 }
     from "../styles/StylesShared"
 import { useHistory } from 'react-router-dom';
+import { useContext } from "react";
 
+import UserContext from "../contexts/userContext";
 import Logout from '../Assets/Logout.svg';
 import MinusSign from '../Assets/MinusSign.svg';
 import PlusSign from '../Assets/PlusSign.svg';
+import axios from "axios";
+
+function logout(setToken, history) {
+    setToken('');
+    history.push('/');
+}
 
 export default function HomePage() {
     const name = 'Fulano';
+    const { token, setToken } = useContext(UserContext);
     const history = useHistory();
 
     return (
         <PageContent>
             <Header>
                 <HeaderText>Olá, {name}</HeaderText>
-                <LogoutImage onClick={() => history.push('/')} src={Logout} alt='Exit the app icon' />
+                <LogoutImage src={Logout} alt='Exit the app icon'
+                    onClick={() => {
+                        logout(setToken, history);
+                    }}
+                />
             </Header>
 
             <WalletHistory></WalletHistory>
-            
+
             <Footer>
                 <FooterButton onClick={() => history.push('/new-add')}>
-                    <img src={PlusSign} alt='Add icon'/>
+                    <img src={PlusSign} alt='Add icon' />
                     <p>Nova Entrada</p>
                 </FooterButton>
                 <FooterButton onClick={() => history.push('/new-remove')}>
-                    <img src={MinusSign}  alt='Remove icon'/>
+                    <img src={MinusSign} alt='Remove icon' />
                     <p>Nova Saída</p>
                 </FooterButton>
             </Footer>

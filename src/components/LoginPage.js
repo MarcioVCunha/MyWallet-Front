@@ -7,34 +7,38 @@ import {
     FooterText
 } from "../styles/StylesShared";
 import axios from 'axios';
+import UserContext from '../contexts/userContext';
+import { useContext } from 'react';
 
 const userInfo = {
     email: '',
     password: ''
 }
 
-function saveInfo(e, type){
-    if(type === 'email'){
+function saveInfo(e, type) {
+    if (type === 'email') {
         userInfo.email = e.target.value;
     } else {
         userInfo.password = e.target.value;
     }
 }
 
-function verifyAcces(history){
+function verifyAcces(setToken, history) {
     const promisse = axios.post('http://localhost:4000/login', userInfo);
-    promisse.then(() => handleSucces(history)).catch(handleError);
+    promisse.then((res) => handleSucces(res, setToken, history)).catch(handleError);
 }
 
-function handleSucces(history){
+function handleSucces(res, setToken, history) {
+    setToken(res.data);
     history.push('/home-page');
 }
 
-function handleError(){
+function handleError() {
     alert('Email ou Senha inexistentes.')
 }
 
 export default function LoginPage() {
+    const { setToken } = useContext(UserContext);
     const history = useHistory();
 
     return (
@@ -42,7 +46,7 @@ export default function LoginPage() {
             <Logo>MyWallet</Logo>
             <TextInput onChange={(e) => saveInfo(e, 'email')} placeholder='E-mail' />
             <TextInput onChange={(e) => saveInfo(e, 'senha')} placeholder='Senha' />
-            <LongButton onClick={() => verifyAcces(history)}>Entrar</LongButton>
+            <LongButton onClick={() => verifyAcces(setToken, history)}>Entrar</LongButton>
             <FooterText
                 onClick={() => history.push('/sign-up')}>
                 Primeira vez? Cadastre-se!
