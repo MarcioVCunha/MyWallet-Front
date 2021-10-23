@@ -11,8 +11,7 @@ import UserContext from './contexts/userContext';
 import LoginPage from './components/LoginPage';
 import SignUpPage from './components/SignUpPage';
 import HomePage from './components/HomePage';
-import NewAdd from './components/NewAdd';
-import NewRemove from './components/NewRemove';
+import NewAdd from './components/AddTransaction';
 
 function App() {
     const [token, setToken] = useState('');
@@ -30,11 +29,8 @@ function App() {
                     <Route path='/home-page' exact>
                         <HomePage />
                     </Route>
-                    <Route path='/new-add' exact>
+                    <Route path='/add-transaction' exact>
                         <NewAdd />
-                    </Route>
-                    <Route path='/new-remove' exact>
-                        <NewRemove />
                     </Route>
                 </Switch>
             </BrowserRouter>

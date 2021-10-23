@@ -55,11 +55,17 @@ export default function HomePage() {
             <WalletHistory />
 
             <Footer>
-                <FooterButton onClick={() => history.push('/new-add')}>
+                <FooterButton onClick={() => history.push({
+                    pathname: '/add-transaction',
+                    state: { type: 'entrada' }
+                })}>
                     <img src={PlusSign} alt='Add icon' />
                     <p>Nova Entrada</p>
                 </FooterButton>
-                <FooterButton onClick={() => history.push('/new-remove')}>
+                <FooterButton onClick={() => history.push({
+                    pathname: '/add-transaction',
+                    state: { type: 'saída' }
+                })}>
                     <img src={MinusSign} alt='Remove icon' />
                     <p>Nova Saída</p>
                 </FooterButton>
