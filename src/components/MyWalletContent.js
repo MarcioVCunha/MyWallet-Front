@@ -9,7 +9,7 @@ export default function MyWalletContent(props) {
             <TransactionsContainer>
                 {values.map((transaction) => {
                     const { type, value, date, description } = transaction;
-                    type === 'saída' ? total -= value : total += value;
+                    type === 'saída' ? total -= Number(value) : total += Number(value);
 
                     return (
                         <TransactionContainer>
@@ -32,7 +32,7 @@ export default function MyWalletContent(props) {
 
 const Container = styled.div`
     width: 100%;
-    height: 100%;
+    height: 110vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -40,7 +40,8 @@ const Container = styled.div`
 `
 
 const TransactionsContainer = styled.div`
-
+    overflow-y: scroll;
+    margin-bottom: 10px;
 `
 
 const TransactionContainer = styled.div`

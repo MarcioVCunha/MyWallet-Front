@@ -18,11 +18,11 @@ export default function WalletHistory() {
 
     useEffect(() => {
         const promisse = axios.get('http://localhost:4000/user-transaction', config);
-        promisse.then(handleSucces).catch((err) => {console.log(err)});
+        promisse.then(handleSucces).catch((err) => { console.log(err) });
     }, [])
 
     function handleSucces(res) {
-        if (res.data === '') {
+        if (res.data.length === 0) {
             setContent(<EmptyContent>Não há registros de
                 entrada ou saída</EmptyContent>)
         } else {
