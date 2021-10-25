@@ -18,7 +18,11 @@ function postTransaction(type, value, description, token, history) {
     }
 
     const promisse = axios.post('http://localhost:4000/add-transaction', body, config);
-    promisse.then().catch((error) => alert('Não conseguimos salvar a ' + type));
+    promisse.then(() => handleSucces(history)).catch((error) => alert('Não conseguimos salvar a ' + type));
+}
+
+function handleSucces(history){
+    history.push('/home-page')
 }
 
 export default function AddTransaction() {
@@ -37,8 +41,7 @@ export default function AddTransaction() {
             <TextInput onChange={(e) => value = e.target.value} placeholder='Valor' />
             <TextInput onChange={(e) => description = e.target.value} placeholder='Descrição' />
             <LongButton onClick={() => {
-                postTransaction(type, value, description, token, history)
-                history.push('/home-page');
+                postTransaction(type, value, description, token, history);
             }}>Salvar {type}</LongButton>
         </AddRemovePageContent>
     )

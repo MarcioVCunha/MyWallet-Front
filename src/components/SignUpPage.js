@@ -59,10 +59,8 @@ function handleSucces() {
 }
 
 function handleError(resp) {
-    if (resp.response.status === 406) {
-        alert('"Senha" e "Confirmar Senha" diferentes');
-    } else if (resp.response.status === 407) {
-        alert('Email já cadastrado');
+    if (resp.response.status === 400) {
+        alert('"Senha" e "Confirmar Senha" diferentes ou Email já cadastrado');
     } else {
         alert(`
             Não conseguimos efetuar o cadastro.
