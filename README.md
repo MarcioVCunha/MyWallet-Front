@@ -18,7 +18,7 @@ Welcome to My-Wallet-Front project, here I build an app to help you keep track o
 </div>
 
 
-<h2>Here is a link to a deploy of my project in vercel:</h2>
+<h2>Link to vercel deploy:</h2>
 
 https://my-wallet-front-ebon.vercel.app/
 
