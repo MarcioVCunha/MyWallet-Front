@@ -17,8 +17,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "startnewnode": "react-scripts --openssl-legacy-provider start",
+    "startnewnode": "NODE_ENV=production react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
+    "buildnewnode": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

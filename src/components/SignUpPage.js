@@ -6,8 +6,7 @@ import {
     FooterText
 } from "../styles/StylesShared";
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
-import { BASE_URL } from "../service/service.baseURL";
+import { signUp } from "../service/service.axios";
 
 const userInfo = {
     name: '',
@@ -43,11 +42,11 @@ function saveString(e, type) {
 
 function sendObject(history) {
     toggleInputs();
-    const promisse = axios.post(`${BASE_URL}sign-up`, userInfo);
+    const promisse = signUp(userInfo);
     promisse.then(() => {
         handleSucces();
         history.push('/');
-    }).catch((resp) => handleError(resp));
+    }).catch((res) => handleError(res));
 }
 
 function handleSucces() {
@@ -59,8 +58,8 @@ function handleSucces() {
     alert('Cadastro feito com sucesso');
 }
 
-function handleError(resp) {
-    if (resp.response.status === 400) {
+function handleError(res) {
+    if (res.status === 400) {
         alert('"Senha" e "Confirmar Senha" diferentes ou Email já cadastrado');
     } else {
         alert(`

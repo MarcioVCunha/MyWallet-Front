@@ -1,19 +1,15 @@
 import { HeaderText, AddRemovePageContent, TextInput, Header, LongButton } from "../styles/StylesShared";
 import { useHistory } from 'react-router-dom';
-import axios from "axios";
-import getConfig from "../service/service.getConfig";
+import { addTransaction } from "../service/service.axios";
 
 function postTransaction(type, value, description, history) {
-
-    const config = getConfig();
-
     const body = {
         value: value,
         description: description,
         type: type
     }
 
-    const promisse = axios.post('http://localhost:4000/add-transaction', body, config);
+    const promisse = addTransaction(body);
     promisse.then(() => handleSucces(history)).catch((error) => alert('Não conseguimos salvar a ' + type));
 }
 

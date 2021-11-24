@@ -1,18 +1,15 @@
-import axios from 'axios';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 
 import MyWalletContent from './MyWalletContent';
-import getConfig from '../service/service.getConfig';
+import { getBalance } from '../service/service.axios';
 
 export default function WalletHistory() {
     const [content, setContent] = useState('');
 
-    const config = getConfig();
-
     useEffect(() => {
-        const promisse = axios.get('http://localhost:4000/user-transaction', config);
-        promisse.then(handleSucces).catch((err) => { console.log(err) });
+        const promisse = getBalance();
+        promisse.then(handleSucces).catch();
     }, [])
 
     function handleSucces(res) {

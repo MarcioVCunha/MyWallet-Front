@@ -6,7 +6,7 @@ import {
     LongButton,
     FooterText
 } from "../styles/StylesShared";
-import axios from 'axios';
+import { login } from '../service/service.axios';
 
 const userInfo = {
     email: '',
@@ -22,7 +22,7 @@ function saveInfo(e, type) {
 }
 
 function verifyAcces(history) {
-    const promisse = axios.post('http://localhost:4000/login', userInfo);
+    const promisse = login(userInfo);
     promisse.then((res) => handleSucces(res, history)).catch(handleError);
 }
 

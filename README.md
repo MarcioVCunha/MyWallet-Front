@@ -14,7 +14,7 @@ Welcome to My-Wallet-Front project, here I build an app to help you keep track o
   '/>
   <img src='./src/Assets/WalletHistory.png' style='
     margin: 10px;
-  '/>>
+  '/>
 </div>
 
 
@@ -39,3 +39,9 @@ In the redirected page, you can then add transactions, adding money to your wall
 <h2>How to run the project:</h2>
 
 Clone the repo to your machine, then run the command 'npm i' to install all libraries.
+Next, you will have to prepare the back-end for the app, you can find it here:
+
+https://github.com/MarcioVCunha/MyWallet-Back
+
+Just run 'npm start' and your page is up and running.
+If you have the version 17.1.0, you can run 'npm run startnewnode' to fix the node error.

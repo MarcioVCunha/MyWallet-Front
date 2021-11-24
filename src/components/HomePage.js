@@ -8,13 +8,12 @@ import {
     from "../styles/StylesShared"
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 import Logout from '../Assets/Logout.svg';
 import MinusSign from '../Assets/MinusSign.svg';
 import PlusSign from '../Assets/PlusSign.svg';
 import WalletHistory from "./WalletHistory.js";
-import getConfig from "../service/service.getConfig.js";
+import { getUserInfo } from "../service/service.axios";
 
 function logout(history) {
     localStorage.clear();
@@ -25,10 +24,8 @@ export default function HomePage() {
     const history = useHistory();
     const [name, setName] = useState('');
 
-    const config = getConfig();
-
     useEffect(() => {
-        const promisse = axios.get('http://localhost:4000/user-info', config);
+        const promisse = getUserInfo();
         promisse.then(handleSucces);
     }, [])
 
