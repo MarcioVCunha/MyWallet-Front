@@ -7,8 +7,6 @@ import {
     FooterText
 } from "../styles/StylesShared";
 import axios from 'axios';
-import UserContext from '../contexts/userContext';
-import { useContext } from 'react';
 
 const userInfo = {
     email: '',
@@ -23,13 +21,13 @@ function saveInfo(e, type) {
     }
 }
 
-function verifyAcces(setToken, history) {
+function verifyAcces(history) {
     const promisse = axios.post('http://localhost:4000/login', userInfo);
-    promisse.then((res) => handleSucces(res, setToken, history)).catch(handleError);
+    promisse.then((res) => handleSucces(res, history)).catch(handleError);
 }
 
-function handleSucces(res, setToken, history) {
-    setToken(res.data);
+function handleSucces(res, history) {
+    localStorage.setItem('token', res.data);
     history.push('/home-page');
 }
 
@@ -38,7 +36,6 @@ function handleError() {
 }
 
 export default function LoginPage() {
-    const { setToken } = useContext(UserContext);
     const history = useHistory();
 
     return (
@@ -46,7 +43,7 @@ export default function LoginPage() {
             <Logo>MyWallet</Logo>
             <TextInput onChange={(e) => saveInfo(e, 'email')} placeholder='E-mail' />
             <TextInput onChange={(e) => saveInfo(e, 'senha')} placeholder='Senha' />
-            <LongButton onClick={() => verifyAcces(setToken, history)}>Entrar</LongButton>
+            <LongButton onClick={() => verifyAcces(history)}>Entrar</LongButton>
             <FooterText
                 onClick={() => history.push('/sign-up')}>
                 Primeira vez? Cadastre-se!

@@ -1,15 +1,11 @@
 import { HeaderText, AddRemovePageContent, TextInput, Header, LongButton } from "../styles/StylesShared";
 import { useHistory } from 'react-router-dom';
-import UserContext from "../contexts/userContext";
-import { useContext } from "react";
 import axios from "axios";
+import getConfig from "../service/service.getConfig";
 
-function postTransaction(type, value, description, token, history) {
-    const config = {
-        headers: {
-            "Authorization": "Bearer " + token
-        }
-    }
+function postTransaction(type, value, description, history) {
+
+    const config = getConfig();
 
     const body = {
         value: value,
@@ -29,7 +25,6 @@ export default function AddTransaction() {
     const history = useHistory();
 
     const type = history.location.state.type;
-    const { token } = useContext(UserContext);
     let value = '';
     let description = '';
 
@@ -41,7 +36,7 @@ export default function AddTransaction() {
             <TextInput onChange={(e) => value = e.target.value} placeholder='Valor' />
             <TextInput onChange={(e) => description = e.target.value} placeholder='Descrição' />
             <LongButton onClick={() => {
-                postTransaction(type, value, description, token, history);
+                postTransaction(type, value, description, history);
             }}>Salvar {type}</LongButton>
         </AddRemovePageContent>
     )

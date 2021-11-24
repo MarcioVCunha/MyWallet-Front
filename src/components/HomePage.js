@@ -7,30 +7,25 @@ import {
 }
     from "../styles/StylesShared"
 import { useHistory } from 'react-router-dom';
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
-import UserContext from "../contexts/userContext";
 import Logout from '../Assets/Logout.svg';
 import MinusSign from '../Assets/MinusSign.svg';
 import PlusSign from '../Assets/PlusSign.svg';
 import WalletHistory from "./WalletHistory.js";
+import getConfig from "../service/service.getConfig.js";
 
-function logout(setToken, history) {
-    setToken('');
+function logout(history) {
+    localStorage.clear();
     history.push('/');
 }
 
 export default function HomePage() {
-    const { token, setToken } = useContext(UserContext);
     const history = useHistory();
     const [name, setName] = useState('');
 
-    const config = {
-        headers: {
-            "Authorization": "Bearer " + token
-        }
-    }
+    const config = getConfig();
 
     useEffect(() => {
         const promisse = axios.get('http://localhost:4000/user-info', config);
@@ -47,7 +42,7 @@ export default function HomePage() {
                 <HeaderText>Olá, {name}</HeaderText>
                 <LogoutImage src={Logout} alt='Exit the app icon'
                     onClick={() => {
-                        logout(setToken, history);
+                        logout(history);
                     }}
                 />
             </Header>

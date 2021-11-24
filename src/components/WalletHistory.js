@@ -1,20 +1,14 @@
 import axios from 'axios';
 import styled from 'styled-components';
-import { useContext, useEffect } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-import UserContext from '../contexts/userContext';
 import MyWalletContent from './MyWalletContent';
+import getConfig from '../service/service.getConfig';
 
 export default function WalletHistory() {
     const [content, setContent] = useState('');
 
-    const { token } = useContext(UserContext);
-    const config = {
-        headers: {
-            "Authorization": "Bearer " + token
-        }
-    }
+    const config = getConfig();
 
     useEffect(() => {
         const promisse = axios.get('http://localhost:4000/user-transaction', config);
