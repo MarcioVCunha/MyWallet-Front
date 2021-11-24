@@ -15,11 +15,6 @@ import PlusSign from '../Assets/PlusSign.svg';
 import WalletHistory from "./WalletHistory.js";
 import { getUserInfo } from "../service/service.axios";
 
-function logout(history) {
-    localStorage.clear();
-    history.push('/');
-}
-
 export default function HomePage() {
     const history = useHistory();
     const [name, setName] = useState('');
@@ -31,6 +26,11 @@ export default function HomePage() {
 
     function handleSucces(res) {
         setName(res.data.name);
+    }
+
+    function logout() {
+        localStorage.clear();
+        history.push('/');
     }
 
     return (
