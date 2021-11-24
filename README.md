@@ -24,7 +24,7 @@ https://my-wallet-front-ebon.vercel.app/
 
 <h2>More in depth of the project</h2>
 
-You have to sign-up as a user and then sign-in, after that, you will be redirected to a protected route, you can refresh the page and will still be logged in the sistem.
+You have to sign-up as a user and then sign-in, after that, you will be redirected to a protected route, you can refresh the page and will still be logged in the system.
 In the redirected page, you can then add transactions, adding money to your wallet or removing it (it's just numbers to help you with your finances, we don't actualy use money in this project), with that, the app will return your balance.
 
 <h2>technologies I used:</h2>
