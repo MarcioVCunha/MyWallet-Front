@@ -7,6 +7,7 @@ import {
 } from "../styles/StylesShared";
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { BASE_URL } from "../service/service.baseURL";
 
 const userInfo = {
     name: '',
@@ -42,11 +43,11 @@ function saveString(e, type) {
 
 function sendObject(history) {
     toggleInputs();
-    const promisse = axios.post('http://localhost:4000/sign-up', userInfo);
+    const promisse = axios.post(`${BASE_URL}sign-up`, userInfo);
     promisse.then(() => {
         handleSucces();
         history.push('/');
-    }).catch(handleError);
+    }).catch((resp) => handleError(resp));
 }
 
 function handleSucces() {
